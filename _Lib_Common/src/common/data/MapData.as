@@ -11,11 +11,17 @@ package common.data
 		{
 			return _dataList;
 		}
+		private var _compentList:Vector.<int>;
+		public function get compentList():Vector.<int>
+		{
+			return _compentList;
+		}
 		
 		public function MapData()
 		{
 			//create 30 * 20 fields
 			_dataList = new Vector.<int>( 30 * 20 );
+			_compentList = new Vector.<int>( 30 * 20 );
 		}
 		
 		public function fromByteArray( bytes:ByteArray ):void
@@ -31,6 +37,11 @@ package common.data
 			{
 				_dataList[i] = compressData.readUnsignedInt();
 			}
+			iLen = compressData.readUnsignedInt();
+			for (i = 0;i<iLen;i++)
+			{
+				_compentList[i] = compressData.readUnsignedInt();
+			}
 			trace( "len: " + iLen + " HEAD: " + head );
 		}
 		
@@ -42,6 +53,12 @@ package common.data
 			for(var i:int = 0;i<iLen;i++)
 			{
 				compressData.writeUnsignedInt( _dataList[i] );
+			}
+			iLen = _compentList.length;
+			compressData.writeUnsignedInt( iLen );
+			for(i = 0;i<iLen;i++)
+			{
+				compressData.writeUnsignedInt( _compentList[i] );
 			}
 			compressData.deflate();
 			

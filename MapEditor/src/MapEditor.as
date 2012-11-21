@@ -29,6 +29,7 @@ package
 		private var _saveCount:int;
 		private var _controlsPanel:ControlsPanel;
 		private var _mapPanel:MapPanel;
+		private var _isPlay:Boolean;
 		
 		public function MapEditor()
 		{
@@ -106,6 +107,37 @@ package
 		{
 			_controlsPanel.addEventListener( "addWalk" , onAddWalkHandler );	
 			_controlsPanel.addEventListener( "addBlock" , onAddBlockHandler );	
+			_controlsPanel.addEventListener( "addCharacter" , onAddCharacterHandler );	
+			_controlsPanel.addEventListener( "addEnemy" , onAddEnemykHandler );	
+			_controlsPanel.addEventListener( "playStop" , onPlayStopHandler );	
+		}
+		
+		protected function onPlayStopHandler(e:Event):void
+		{
+			if(_isPlay)
+			{
+				_isPlay = false;
+			}
+			else
+			{
+				_isPlay = true;
+				startPlay();
+			}
+		}
+		
+		private function startPlay():void
+		{
+			
+		}
+		
+		protected function onAddEnemykHandler(e:Event):void
+		{
+			_mapPanel.addType = 2000;
+		}
+		
+		protected function onAddCharacterHandler(e:Event):void
+		{
+			_mapPanel.addType = 1000;
 		}
 		
 		private function onAddBlockHandler(e:Event):void

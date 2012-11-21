@@ -62,10 +62,21 @@ package panel
 			}
 			if(blockX >= 0 && blockX < 30 && blockY >= 0 && blockY < 20)
 			{
-				if(_mapData.dataList[ blockX + blockY * 30 ] != _addType)
+				if( _addType >= 1000)
 				{
-					_mapData.dataList[ blockX + blockY * 30 ] = _addType;
-					_mapModel.updateBlock( _mapData.dataList[ blockX + blockY * 30 ], blockX + blockY * 30 );
+					if( _mapData.compentList[ blockX + blockY * 30 ] != _addType )
+					{
+						_mapData.compentList[ blockX + blockY * 30 ] = _addType;
+						_mapModel.updateCompentBlock( _mapData.compentList[ blockX + blockY * 30 ], blockX + blockY * 30 );
+					}
+				}
+				else
+				{
+					if(_mapData.dataList[ blockX + blockY * 30 ] != _addType)
+					{
+						_mapData.dataList[ blockX + blockY * 30 ] = _addType;
+						_mapModel.updateBlock( _mapData.dataList[ blockX + blockY * 30 ], blockX + blockY * 30 );
+					}
 				}
 			}
 		}
