@@ -1,8 +1,7 @@
 package
 {
-	import data.MapData;
+	import common.data.IMapData;
 	
-	import flash.display.Shape;
 	import flash.display.Sprite;
 
 	public class MapModel extends Sprite
@@ -11,7 +10,7 @@ package
 		{
 		}
 		
-		public function update( mapData:MapData ):void
+		public function update( mapData:IMapData ):void
 		{
 			var iLen:int = mapData.dataList.length;
 			for( var i:int = 0;i<iLen;i++)

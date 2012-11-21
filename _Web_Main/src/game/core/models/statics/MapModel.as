@@ -1,7 +1,10 @@
 package  game.core.models.statics
 {
-	import game.core.interfaces.model.IMapModel;
+	import common.utils.interfaces.IMap;
+	
 	import game.base.models.StaticUnitModel;
+	import game.core.interfaces.model.IMapModel;
+	import common.data.IMapData;
 
 	/**
 	 * 2D地图模型
@@ -26,20 +29,13 @@ package  game.core.models.statics
 		 * 导入地图数据
 		 * @param data
 		 */		
-		public function MapModel( data:Object )
+		public function MapModel( data:IMapData )
 		{
 			super();
 			
 			if(data)
 			{
-				var dataObj:Object =  data;
-				var dataArr:Array = dataObj as Array;
-				_dataList = new Vector.<int>();
-				var iLen:int = dataArr.length;
-				for(var i:int; i<iLen; i++)
-				{
-					_dataList.push( dataArr[i] );
-				}
+				_dataList = data.dataList;
 			}
 		}
 	}

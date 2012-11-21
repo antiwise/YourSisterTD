@@ -1,11 +1,15 @@
 package game.starling
 {
 	import common.base.views.starling.BaseView;
+	import common.data.IMapData;
+	
+	import flash.utils.ByteArray;
 	
 	import game.core.interfaces.view.IMapView;
+	import game.core.managers.DebugMgr;
 	import game.core.managers.MainMgr;
 	import game.core.map.MapView;
-	import game.core.unit.CharacterUint;
+	import game.core.unit.CharacterUnit;
 	import game.core.unit.EnemyUnit;
 	import game.untils.MgrObjects;
 	
@@ -23,7 +27,7 @@ package game.starling
 		/**
 		 * 
 		 */		
-		private var _characterUnit:CharacterUint;
+		private var _characterUnit:CharacterUnit;
 		/**
 		 * 
 		 */		
@@ -68,40 +72,25 @@ package game.starling
 			MgrObjects.debugMgr.log( "初始化耗时: " + MainMgr.instance.endTimeCount() );
 			
 //			MgrObjects.uiMgr.init(();
-			MgrObjects.mapMgr.loadMap( onMapJsonLoadCompleteHandler );
+			var mapUrl:String = "data/map0001.map";
+			MgrObjects.mapMgr.loadMap( mapUrl, onMapJsonLoadCompleteHandler );
 		}
 		
-		private function onMapJsonLoadCompleteHandler( str:Object ):void
+		private function onMapJsonLoadCompleteHandler( data:ByteArray ):void
 		{
 			MgrObjects.debugMgr.log( "地图加载耗时: " + MainMgr.instance.endTimeCount() );
-			//1 平面 ，2斜角
-			GAME_MODE = 1;
 			
-			var strMapData:Object = str;
-			if(GAME_MODE == 1)
-			{
-				_map = new MapView( strMapData["mapdata"] );
-				_map.init();
-				MgrObjects.debugMgr.log( "初始化地图耗时: " + MainMgr.instance.endTimeCount() );
-			}
-			else if(GAME_MODE == 2)
-			{
-//				map = new TileMap();
-				return;
-			} 
-			
+			var mapData:IMapData = MgrObjects.mapMgr.mapData
+			mapData.fromByteArray( data );
+
+			_map = new MapView( mapData );
+			_map.init();
+			MgrObjects.debugMgr.log( "初始化地图耗时: " + MainMgr.instance.endTimeCount() );
 			addChild( _map as BaseView );
 			
-			if(GAME_MODE == 1)
-			{
-//				_characterUnit = new CharacterUint();
-			}
-			else if(GAME_MODE == 2 || GAME_MODE == 3)
-			{
-//				characterUnit = new TileCharacterUnit();
-			}
-//			_characterUnit.init( [1,8,5,4] );
-//			_map.addPlayer( _characterUnit );
+			_characterUnit = new CharacterUnit( 5, 5, 1 );
+			_characterUnit.init();
+			_map.addCharacter( _characterUnit );
 			
 //			_enemyUnitArr = [];
 			
@@ -138,10 +127,10 @@ package game.starling
 //			{
 //				(_map as BaseView).sortChildren( sortFunction );
 //			}
-//			if( characterUnit )
-//			{
-//				characterUnit.onInputHandler( map );
-//			}
+			if( _characterUnit )
+			{
+				_characterUnit.onUpdateHandler(null);
+			}
 //			for each(enemyUnit in enemyUnitArr)
 //			{
 //				if(enemyUnit)
@@ -163,17 +152,23 @@ package game.starling
 		private function onTouch(event:TouchEvent):void
 		{
 			var touch:Touch = event.getTouch(stage);
-			if (touch && touch.phase != TouchPhase.HOVER)
+			if (touch)
 			{
-				trace( "[GameWorld] onTouch " + touch.globalX, touch.globalY );
-			}			
+				if(touch.phase == TouchPhase.BEGAN)
+				{
+					MgrObjects.debugMgr.serverLog( "[GameWorld] onTouch BEGAN " + touch.globalX + "," + touch.globalY, DebugMgr.PACKET_SEND );
+				}
+				else if(touch.phase == TouchPhase.ENDED)
+				{
+					
+				}
+			}
 		}
 		
 		private function onMouseDown(e:TouchEvent):void
 		{
 			var touch:Touch = e.getTouch(stage);
 		}
-		
 		
 		private function onKeyUpEventHandle(e:KeyboardEvent):void
 		{

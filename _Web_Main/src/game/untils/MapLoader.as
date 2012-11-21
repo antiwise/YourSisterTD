@@ -2,6 +2,7 @@ package game.untils
 {
 	import flash.events.Event;
 	import flash.net.URLLoader;
+	import flash.net.URLLoaderDataFormat;
 	import flash.net.URLRequest;
 
 	public class MapLoader
@@ -18,15 +19,16 @@ package game.untils
 		{
 			mapJsonLoader.removeEventListener(Event.COMPLETE, onMapJsonLoadCompleteHandler);
 			
-			_callBack( JSON.parse(mapJsonLoader.data) );
+			_callBack( mapJsonLoader.data );
 		}
 		
-		public static function load( callBack:Function):void
+		public static function load( urlStr:String, callBack:Function):void
 		{
 			_callBack = callBack;
 			mapJsonLoader = new URLLoader();
+			mapJsonLoader.dataFormat = URLLoaderDataFormat.BINARY;
 			mapJsonLoader.addEventListener(Event.COMPLETE, onMapJsonLoadCompleteHandler);
-			mapJsonLoader.load(new URLRequest("data/map.json"));
+			mapJsonLoader.load(new URLRequest( urlStr ));
 		}
 	}
 }

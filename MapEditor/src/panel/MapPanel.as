@@ -2,7 +2,7 @@ package panel
 {
 	import com.bit101.components.Panel;
 	
-	import data.MapData;
+	import common.data.IMapData;
 	
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Shape;
@@ -12,7 +12,7 @@ package panel
 	public class MapPanel extends Panel
 	{
 		private var _addType:int = 1;
-		private var _mapData:MapData;
+		private var _mapData:IMapData;
 		private var _mapModel:MapModel;
 		private var _mouseBlock:Shape;
 		private 	const WIDTH:Number = 32 * 0.6;
@@ -60,7 +60,7 @@ package panel
 			{
 				return;
 			}
-			if(blockX > 0 && blockX < 30 && blockY > 0 && blockY < 20)
+			if(blockX >= 0 && blockX < 30 && blockY >= 0 && blockY < 20)
 			{
 				if(_mapData.dataList[ blockX + blockY * 30 ] != _addType)
 				{
@@ -88,7 +88,7 @@ package panel
 			}
 		}
 		
-		public function setData( mapData:MapData ):void
+		public function setData( mapData:IMapData ):void
 		{
 			_mapData = mapData;
 			_mapModel.update( _mapData );

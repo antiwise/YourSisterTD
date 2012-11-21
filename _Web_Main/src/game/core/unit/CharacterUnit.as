@@ -15,13 +15,13 @@ package  game.core.unit
 	 * 人物视图
 	 * @author noah
 	 */
-	public class CharacterUint extends DynamicMapUnit implements ICharacterView
+	public class CharacterUnit extends DynamicMapUnit implements ICharacterView
 	{
 		public function get characterModel():ICharacterModel
 		{
 			return _model as ICharacterModel;
 		}
-		public function CharacterUint( x:int, y:int, speed:Number )
+		public function CharacterUnit( x:int, y:int, speed:Number )
 		{
 			super( x, y );
 			initParams["speed"] = speed;
@@ -34,8 +34,8 @@ package  game.core.unit
 			_controller = new CharacterController();
 			_controller.init(_model);
 			
-			_model.x = initParams["x"] * MapModel.BLOCK_WIDTH;
-			_model.y = initParams["y"] * MapModel.BLOCK_WIDTH;
+			_model.x = initParams["x"] * MapModel.BLOCK_WIDTH - ( MapModel.BLOCK_WIDTH >> 1 );
+			_model.y = initParams["y"] * MapModel.BLOCK_WIDTH - ( MapModel.BLOCK_WIDTH >> 1 );
 			_model.addEventListener( ModelEvent.UPDATE, this.onUpdateHandler);
 			characterModel.speed = initParams["speed"];
 			setPosPoint();

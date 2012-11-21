@@ -1,9 +1,9 @@
-package data
+package common.data
 {
 	import flash.utils.ByteArray;
 	import flash.utils.CompressionAlgorithm;
 
-	public class MapData
+	public class MapData implements IMapData
 	{
 		public static const MAP_FILE_HEAD:String = "MAP";
 		private var _dataList:Vector.<int>;

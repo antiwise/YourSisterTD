@@ -2,7 +2,8 @@ package
 {
 	import com.bit101.components.Style;
 	
-	import data.MapData;
+	import common.data.IMapData;
+	import common.data.MapData;
 	
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
@@ -24,7 +25,7 @@ package
 	public class MapEditor extends Sprite
 	{
 		private var _currentFile:File;
-		private var _mapData:MapData;
+		private var _mapData:IMapData;
 		private var _saveCount:int;
 		private var _controlsPanel:ControlsPanel;
 		private var _mapPanel:MapPanel;

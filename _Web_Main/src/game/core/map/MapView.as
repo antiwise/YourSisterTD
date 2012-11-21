@@ -1,13 +1,17 @@
 package game.core.map
 {
+	import common.data.IMapData;
+	
 	import flash.display.BitmapData;
 	import flash.geom.Matrix;
 	import flash.geom.Rectangle;
 	
 	import game.base.units.GameUint;
 	import game.core.interfaces.model.IMapModel;
+	import game.core.interfaces.view.ICharacterView;
 	import game.core.interfaces.view.IMapView;
 	import game.core.models.statics.MapModel;
+	import game.core.unit.CharacterUnit;
 	import game.untils.MgrObjects;
 	import game.untils.QuadTrees;
 	
@@ -54,7 +58,7 @@ package game.core.map
 		 * 创建四叉树
 		 * @param data
 		 */		
-		public function MapView( mapData:Object )
+		public function MapView( mapData:IMapData )
 		{
 			super();
 			initParams = {"mapData":mapData};
@@ -122,6 +126,11 @@ package game.core.map
 		{
 			_groundLevel.texture = _renderTexutre;
 			_groundLevel.readjustSize();
+		}
+		
+		public function addCharacter( character:ICharacterView ):void
+		{
+			_contentLevel.addChild( character as CharacterUnit );
 		}
 		
 		public function get groundLevel():Image

@@ -39,6 +39,7 @@
     <classEntry path="common.core.display.starling.TPAnimation"/>
     <classEntry path="common.core.display.starling.TPSequence"/>
     <classEntry path="common.core.display.starling.TPMovieClip"/>
+    <classEntry path="common.data.IMapData"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
