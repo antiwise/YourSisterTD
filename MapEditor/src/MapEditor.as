@@ -52,8 +52,15 @@ package
 			initMenus();
 			initPanels();
 			initPanelsEvent();
+			initMap();
 			
 			stage.nativeWindow.addEventListener(Event.RESIZE, onResizeHandle);
+		}
+		
+		private function initMap():void
+		{
+			_mapData = new MapData();
+			_mapPanel.setData( _mapData );
 		}
 		
 		private function initMenus():void
@@ -62,6 +69,7 @@ package
 			editorMenu.addEventListener( "new", menuEventHandler);
 			editorMenu.addEventListener( "open", menuEventHandler);
 			editorMenu.addEventListener( "save", menuEventHandler);
+			editorMenu.addEventListener( "saveas", menuEventHandler);
 			stage.nativeWindow..menu = editorMenu;
 		}
 		
@@ -118,8 +126,14 @@ package
 					onSaveHandler();
 					break;
 				}
+				case "saveas":
+				{
+					onSaveAsHandler();
+					break;
+				}
 			}
 		}
+		
 		/**
 		 * 新建地图
 		 */		
@@ -145,13 +159,35 @@ package
 		 */		
 		private function onSaveHandler():void
 		{
-			var bytes:ByteArray = _mapData.toByteArray();
-			var fs:FileStream = new FileStream();
-			fs.open(_currentFile, FileMode.WRITE);
-			fs.position = 0;
-			fs.truncate();
-			fs.writeBytes( bytes );
-			fs.close();
+			if(_mapData && _mapData.toByteArray())
+			{
+				if(_currentFile)
+				{
+					var bytes:ByteArray = _mapData.toByteArray();
+					var fs:FileStream = new FileStream();
+					fs.open(_currentFile, FileMode.WRITE);
+					fs.position = 0;
+					fs.truncate();
+					fs.writeBytes( bytes );
+					fs.close();
+				}
+				else
+				{
+					onSaveAsHandler();
+				}
+			}
+		}
+		
+		private function onSaveAsHandler():void
+		{
+			if(_mapData && _mapData.toByteArray())
+			{			
+				if(!_currentFile)
+				{
+					_currentFile = new File();
+				}
+				_currentFile.save( _mapData.toByteArray(), "未命名_" + _saveCount++ +".map" );
+			}
 		}
 		/**
 		 * 读取打开的地图

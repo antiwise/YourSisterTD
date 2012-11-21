@@ -25,6 +25,7 @@ package
             integrateSubMenu(subMenu, new EditorMenuItem("新建",  "new", false));
             integrateSubMenu(subMenu, new EditorMenuItem("打开",  "open", false));
             integrateSubMenu(subMenu, new EditorMenuItem("保存",  "save", false));
+            integrateSubMenu(subMenu, new EditorMenuItem("保存为...",  "saveas", false));
 			
 			addSubmenu(subMenu, "  文件  ");
         }
