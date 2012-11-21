@@ -8,6 +8,7 @@ package
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	import flash.events.NativeWindowBoundsEvent;
 	import flash.filesystem.File;
 	import flash.filesystem.FileMode;
@@ -57,6 +58,13 @@ package
 			initMap();
 			
 			stage.nativeWindow.addEventListener(Event.RESIZE, onResizeHandle);
+			stage.addEventListener(MouseEvent.MOUSE_UP, onStageMouseUpHandler);
+			stage.addEventListener(MouseEvent.ROLL_OUT, onStageMouseUpHandler);
+		}
+		
+		protected function onStageMouseUpHandler(e:Event):void
+		{
+			_mapPanel.onMouseUpStage();
 		}
 		
 		private function initMap():void

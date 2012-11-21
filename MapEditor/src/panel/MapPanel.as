@@ -36,8 +36,6 @@ package panel
 			addChild( _mouseBlock );
 			_mapModel.addEventListener(Event.ENTER_FRAME, onMapModelEnterFrameHandler);
 			_mapModel.addEventListener(MouseEvent.MOUSE_DOWN, onMapModelUpDownHandler);
-			_mapModel.addEventListener(MouseEvent.MOUSE_UP, onMapModelUpDownHandler);
-			_mapModel.addEventListener(MouseEvent.ROLL_OUT, onMapModelOutHandler);
 		}
 		
 		private function onMapModelEnterFrameHandler(e:Event):void
@@ -58,10 +56,17 @@ package panel
 			var blockX:int = mouseX / WIDTH;
 			var blockY:int = mouseY / WIDTH;
 			
-			if(_mapData.dataList[ blockX + blockY * 30 ] != _addType)
+			if(blockX + blockY * 30 > 600)
 			{
-				_mapData.dataList[ blockX + blockY * 30 ] = _addType;
-				_mapModel.updateBlock( _mapData.dataList[ blockX + blockY * 30 ], blockX + blockY * 30 );
+				return;
+			}
+			if(blockX > 0 && blockX < 30 && blockY > 0 && blockY < 20)
+			{
+				if(_mapData.dataList[ blockX + blockY * 30 ] != _addType)
+				{
+					_mapData.dataList[ blockX + blockY * 30 ] = _addType;
+					_mapModel.updateBlock( _mapData.dataList[ blockX + blockY * 30 ], blockX + blockY * 30 );
+				}
 			}
 		}
 		
@@ -87,6 +92,11 @@ package panel
 		{
 			_mapData = mapData;
 			_mapModel.update( _mapData );
+		}
+		
+		public function onMouseUpStage():void
+		{
+			onMapModelOutHandler(null);
 		}
 	}
 }
