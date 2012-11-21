@@ -44,6 +44,8 @@ package
 		
 		private function initialize():void
 		{
+//			new UpdateUtil("http://***/MapEditor.xml");	
+			
 			Style.fontName = "arial";
 			Style.embedFonts = false;
 			Style.fontSize = 12;

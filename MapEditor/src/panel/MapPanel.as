@@ -5,6 +5,7 @@ package panel
 	import data.MapData;
 	
 	import flash.display.DisplayObjectContainer;
+	import flash.display.Shape;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
@@ -13,6 +14,8 @@ package panel
 		private var _addType:int = 1;
 		private var _mapData:MapData;
 		private var _mapModel:MapModel;
+		private var _mouseBlock:Shape;
+		private 	const WIDTH:Number = 32 * 0.6;
 		
 		public function set addType( value:int ):void
 		{
@@ -24,14 +27,34 @@ package panel
 			super(parent, xpos, ypos);
 			_mapModel = new MapModel();
 			addChild( _mapModel );
+			_mouseBlock = new Shape();
+			_mouseBlock.graphics.beginFill( 0xFF0000, 0.7 );
+			_mouseBlock.graphics.drawRect( 0, 0, WIDTH, WIDTH );
+			_mouseBlock.graphics.endFill();
+			_mouseBlock.x = 0;
+			_mouseBlock.y = 0;
+			addChild( _mouseBlock );
+			_mapModel.addEventListener(Event.ENTER_FRAME, onMapModelEnterFrameHandler);
 			_mapModel.addEventListener(MouseEvent.MOUSE_DOWN, onMapModelUpDownHandler);
 			_mapModel.addEventListener(MouseEvent.MOUSE_UP, onMapModelUpDownHandler);
 			_mapModel.addEventListener(MouseEvent.ROLL_OUT, onMapModelOutHandler);
 		}
 		
+		private function onMapModelEnterFrameHandler(e:Event):void
+		{
+			var blockX:int = mouseX / WIDTH;
+			var blockY:int = mouseY / WIDTH;
+			moveMouse( blockX, blockY );
+		}
+		
+		private function moveMouse(blockX:int, blockY:int):void
+		{
+			_mouseBlock.x = blockX * WIDTH;
+			_mouseBlock.y = blockY * WIDTH;
+		}
+		
 		private function onMapModelOverHandler(e:Event):void
 		{
-			var WIDTH:Number = 32 * 0.6;
 			var blockX:int = mouseX / WIDTH;
 			var blockY:int = mouseY / WIDTH;
 			
