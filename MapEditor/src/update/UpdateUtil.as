@@ -12,7 +12,6 @@ package update
 	import flash.net.URLRequest;
 	import flash.utils.ByteArray;
 	
-	
 	public class UpdateUtil
 	{
 		private var _urlloader:URLLoader;

@@ -22,10 +22,10 @@ package
             var subMenu:NativeMenu;
             subMenu = new NativeMenu();
 			
-            integrateSubMenu(subMenu, new EditorMenuItem("新建",  "new", false));
-            integrateSubMenu(subMenu, new EditorMenuItem("打开",  "open", false));
-            integrateSubMenu(subMenu, new EditorMenuItem("保存",  "save", false));
-            integrateSubMenu(subMenu, new EditorMenuItem("保存为...",  "saveas", false));
+            integrateSubMenu(subMenu, new EditorMenuItem("新建",  "new", false, "n", true));
+            integrateSubMenu(subMenu, new EditorMenuItem("打开",  "open", false, "o", true));
+            integrateSubMenu(subMenu, new EditorMenuItem("保存",  "save", false, "s", true));
+            integrateSubMenu(subMenu, new EditorMenuItem("保存为...",  "saveas", false, "s", true, true));
 			
 			addSubmenu(subMenu, "  文件  ");
         }

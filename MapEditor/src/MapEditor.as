@@ -146,6 +146,7 @@ package
 			_currentFile = new File();
 			_currentFile.addEventListener(Event.COMPLETE, onSaved ,false,0,true);
 			_currentFile.save( bytes, "未命名_"+ _saveCount++ + ".map");
+			_currentFile = null;
 		}
 		/**
 		 *打开地图 
@@ -155,6 +156,7 @@ package
 			_currentFile = new File();
 			_currentFile.addEventListener(Event.SELECT, onOpened,false,0, true);
 			_currentFile.browseForOpen("打开文件",[new FileFilter("地图文件","*.map")]);
+			_currentFile = null;
 		}
 		/**
 		 * 保存地图
@@ -188,7 +190,9 @@ package
 				{
 					_currentFile = new File();
 				}
+				_currentFile.addEventListener(Event.COMPLETE, onSaved);
 				_currentFile.save( _mapData.toByteArray(), "未命名_" + _saveCount++ +".map" );
+				_currentFile = null;
 			}
 		}
 		/**
@@ -196,6 +200,7 @@ package
 		 */		
 		private function onOpened(e:Event):void
 		{
+			_currentFile = e.currentTarget as File;
 			var fs:FileStream = new FileStream();
 			fs.open(_currentFile, FileMode.READ);
 			
@@ -212,6 +217,7 @@ package
 		 */		
 		private function onSaved(e:Event):void
 		{
+			_currentFile = e.currentTarget as File;
 			_mapPanel.setData( _mapData );
 		}
 	}
