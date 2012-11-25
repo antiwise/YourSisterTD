@@ -1,142 +1,156 @@
 package game.core.managers
 {
-	import common.base.interfaces.IMgr;
-	import common.utils.Utils;
-	
-	import flash.display.Bitmap;
-	import flash.display.BitmapData;
-	import flash.display.DisplayObject;
-	import flash.display.Loader;
-	import flash.display.MovieClip;
-	import flash.display.SimpleButton;
-	import flash.display.Sprite;
-	import flash.media.Sound;
-
-	/**
-	 * 
-	 * @author noah
-	 */
-	public class UIMgr implements IMgr
-	{
-		/**
-		 * 
-		 */		
-		private static var _loader:Loader;
-		private var _isDisposed:Boolean;
-		
-		/**
-		 * 构造函数
-		 */		
-		public function UIMgr()	
-		{
-			
-		}
-		/**
-		 * 初始化
-		 */		
-		public function init( loader:Loader ):void
-		{
-			_loader = loader;
-		}
-		
-		/**
-		 * 获取加载器 
-		 * @return 
-		 */		
-		public static function get loader():Loader{
-			return _loader;
-		}
-		/**
-		 * 获取某个类
-		 * @param str
-		 * @return 
-		 */		
-		public static function getClass(str:String):Class{
-			return Utils.getClassFromLoader(str,_loader);
-		}
-		/**
-		 * 获取UI库中的不确定类型的元件
-		 * @param str 元件的链接名
-		 * @return
-		 */		
-		public static function getDisplayObject(str:String):DisplayObject{
-			return Utils.getDisplayObjectFromLoader(str,_loader);
-		}
-		/**
-		 * 获取UI库中的MC
-		 * @param str MC的链接名
-		 * @return
-		 */		
-		public static function getMovieClip(str:String):MovieClip{
-			return Utils.getMovieClipFromLoader(str,_loader);
-		}
-		/**
-		 * 获取UI库中的sprite 
-		 * @param str
-		 * @return 
-		 */		
-		public static function getSprite(str:String):Sprite	{
-			return Utils.getSpriteFromLoader(str,_loader);
-		}
-		/**
-		 * 获取UI库中的按钮
-		 * @param str 按钮的链接名
-		 * @return 
-		 */		
-		public static function getButton(str:String):SimpleButton{
-			return Utils.getSimpleButtonFromLoader(str,_loader);
-		}
-		/**
-		 * 获取UI库中的图片
-		 * @param str 图片的链接名
-		 * @return
-		 */		
-		public static function getBitmap(str:String):Bitmap	{
-			return new Bitmap(Utils.getBitmapDataFromLoader(str,_loader,true));
-		}
-		/**
-		 * 获取UI库中的图片BitmapData
-		 * @param str 图片的链接名
-		 * @return
-		 */		
-		public static function getBitmapData(str:String):BitmapData	{
-			return Utils.getBitmapDataFromLoader(str,_loader,true);
-		}
-		/**
-		 * 获取UI库中的音乐文件
-		 * @param str 音乐文件的链接名
-		 * @return
-		 */		
-		public static function getSound(str:String):Sound{
-			return Utils.getSoundFromLoader(str,_loader);
-		}
-		
-		/**
-		 * UI库中是否有指定的类名 
-		 * @param name
-		 * @return 
-		 */		
-		public static function hasDefinition(name:String):Boolean{
-			return _loader.contentLoaderInfo.applicationDomain.hasDefinition(name);
-		}
-		
-		public function dispose():void
-		{
-			if(_isDisposed == false)
-			{
-				distruct();
-				_isDisposed = true;
-			}
-		}
-		
-		protected function distruct():void
-		{
-			//TODO dispose resource table.
-		}
-		
-		public function get isDisposed():Boolean
-		{
-			return _isDisposed;
-		}
-	}
+    import common.base.interfaces.IMgr;
+    
+    import flash.display.Loader;
+    import flash.display.MovieClip;
+    import flash.display.SimpleButton;
+    import flash.events.Event;
+    import flash.events.EventDispatcher;
+    import flash.events.MouseEvent;
+    import flash.net.URLRequest;
+    import flash.utils.setTimeout;
+    
+    import game.untils.MgrObjects;
+    
+    /**
+     * 
+     * @author noah
+     */
+    public class UIMgr extends EventDispatcher implements IMgr
+    {
+        /**
+         * 
+         */		
+        private var _loader:Loader;
+        private var _isDisposed:Boolean;
+        
+        /**
+         * 构造函数
+         */		
+        public function UIMgr()	
+        {
+            
+        }
+        /**
+         * 初始化
+         */		
+        public function init():void
+        {
+            _loader = new Loader();
+            _loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onLoadComplete);
+            _loader.load(new URLRequest("TDui.swf"));
+        }
+        
+        private var _mainMc:MovieClip;
+        
+        protected function onLoadComplete(e:Event):void
+        {
+            _mainMc = (_loader.content as MovieClip)["mc"];
+            MgrObjects.displayMgr.getStage.addChildAt( _mainMc, 0 );
+            
+            initMainUI();
+        }
+        
+        private function initMainUI(e:MouseEvent = null):void
+        {
+            if(e)
+            {
+                e.stopPropagation();
+            }
+            _mainMc.gotoAndStop( 1 );
+            _mainMc.addEventListener(MouseEvent.MOUSE_DOWN, onMainUIClickHandler);
+        }
+        
+        protected function onMainUIClickHandler(e:MouseEvent):void
+        {
+            _mainMc.removeEventListener(MouseEvent.MOUSE_DOWN, onMainUIClickHandler);
+            initChooseUI();
+        }
+        
+        private function initChooseUI():void
+        {
+            _mainMc.gotoAndStop( 2 );
+            _topBgMc = _mainMc["topBgMc"];
+            _bgMc = _mainMc["bgMc"];
+            
+            (_mainMc["mainBtn"] as SimpleButton).addEventListener(MouseEvent.MOUSE_DOWN, initMainUI );
+            (_mainMc["startBtn"] as SimpleButton).addEventListener(MouseEvent.MOUSE_DOWN, onStartGame );
+        }
+        
+        protected function onStartGame(e:MouseEvent):void
+        {
+            initLoadingUI();
+            
+            //加载地图
+            setTimeout( initGameUI, 500 );
+        }
+        
+        private var _menuMc:MovieClip;
+        private var _gameOverMc:MovieClip;
+        private var _gameWinMc:MovieClip;
+        private var _topBgMc:MovieClip;
+        private var _bgMc:MovieClip;
+        
+        private function initGameUI():void
+        {
+            _mainMc.gotoAndStop( 4 );
+            
+            _mainMc.addEventListener(Event.ENTER_FRAME, onGameEnterFrameHandler);
+        }
+        
+        protected function onGameEnterFrameHandler(e:Event):void
+        {
+            if(_mainMc.currentFrame == 4)
+            {
+                _mainMc.removeEventListener(Event.ENTER_FRAME, onGameEnterFrameHandler );
+                
+                initGameStart();
+            }
+        }
+        
+        private function initGameStart():void
+        {
+            _bgMc.visible = false;
+            _menuMc = _mainMc["menuMc"];
+            _menuMc.visible = false;
+            _gameOverMc = _mainMc["gameOverMc"];
+            _gameOverMc.visible =false;
+            _gameWinMc = _mainMc["gameWinMc"];
+            _gameWinMc.visible = false;
+            
+        }
+        
+        private function initLoadingUI():void
+        {
+            _mainMc.gotoAndStop( 3 );
+        }
+        
+        /**
+         * 获取加载器 
+         * @return 
+         */		
+        public function get loader():Loader{
+            return _loader;
+        }
+        
+        public function dispose():void
+        {
+            if(_isDisposed == false)
+            {
+                distruct();
+                _isDisposed = true;
+            }
+        }
+        
+        protected function distruct():void
+        {
+            //TODO dispose resource table.
+        }
+        
+        public function get isDisposed():Boolean
+        {
+            return _isDisposed;
+        }
+    }
 }

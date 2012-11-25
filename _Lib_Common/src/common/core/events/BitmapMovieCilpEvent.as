@@ -1,7 +1,7 @@
 package  common.core.events
 {
-	import flash.events.Event;
-
+    import flash.events.Event;
+    
     public class BitmapMovieCilpEvent extends Event
     {
         public static const MOTION_FINISHED:String = "bitmap_motionFinish";

@@ -266,10 +266,10 @@ package common.core.display.starling
         {
             _alphaLoader.contentLoaderInfo.removeEventListener(Event.COMPLETE, prepareTextureData);
             var alphaData:BitmapData = (_alphaLoader.content as Bitmap).bitmapData;//复制出来为使用时检查碰撞使用
-//            if(Capabilities.isDebugger == true)
-//            {
-//                trace("tpa["+_tpaId+"] alpha collide data (use transparent? "+alphaData.transparent+") size:", alphaData.width+"x"+alphaData.height,"occur "+(alphaData.width*alphaData.height*6)+" bytes");
-//            }
+            //            if(Capabilities.isDebugger == true)
+            //            {
+            //                trace("tpa["+_tpaId+"] alpha collide data (use transparent? "+alphaData.transparent+") size:", alphaData.width+"x"+alphaData.height,"occur "+(alphaData.width*alphaData.height*6)+" bytes");
+            //            }
             _textureCollideList.push(alphaData.clone());
             _alphaLoader.unloadAndStop();
             _alphaLoader = null;
@@ -348,7 +348,7 @@ package common.core.display.starling
                 fps = _actionFPSList[index]
             }
             
-//            trace("getAnimationFPS{"+action+"}:", fps);
+            //            trace("getAnimationFPS{"+action+"}:", fps);
             return fps; 
         }
         
@@ -423,17 +423,17 @@ package common.core.display.starling
             textureAtlas = _textureAtlasList[i];
             if(textureAtlas == null)
             {
-//                var time:uint = getTimer(); 
+                //                var time:uint = getTimer(); 
                 texture = Texture.fromAtfData(_atfDatasList[i]);
-//                if(Capabilities.isDebugger == true)
-//                {
-//                    trace("tpa["+_tpaId+"] upload textureAtlas no."+(i+1)+" clips use time: "+(getTimer()-time)+"ms");
-//                }
+                //                if(Capabilities.isDebugger == true)
+                //                {
+                //                    trace("tpa["+_tpaId+"] upload textureAtlas no."+(i+1)+" clips use time: "+(getTimer()-time)+"ms");
+                //                }
                 textureAtlas = new TextureAtlas(texture, _textureAtlasSettingList[i]);
                 _textureAtlasList[i] = textureAtlas;
                 _textureList[i] = texture;
             }
-                
+            
             texture = textureAtlas.getTexture(name);
             
             if(texture != null)
@@ -497,57 +497,57 @@ package common.core.display.starling
             if(_isDisposed == false)
             {
                 _isDisposed = true;
-				distruct();
+                distruct();
             }
         }
-		/**
-		 * 释放显存中的贴图
-		 */		
-		public function disposeTexture():void
-		{
-			var len:int = _textureList.length;  
-			for(var i:int =0; i<len; i++)
-			{
-				if(_textureList[i] != null)
-				{
-					_textureList[i].dispose();
-					_textureList[i] = null;
-				}
-				
-				if(_textureAtlasList[i] != null)
-				{
-					_textureAtlasList[i].dispose();
-					_textureAtlasList[i] = null;
-				}
-			}
-		}
-		
-		protected function distruct():void
-		{
-			disposeTexture();
-			
-			var len:int = _textureCollideList.length;  
-			for(var i:int =0; i<len; i++)
-			{
-				_textureCollideList[i].dispose();
-				
-				if(_atfDatasList[i] != null)
-				{
-					_atfDatasList[i].clear();
-				}
-			}
-			
-			if(_alphaLoader != null)
-			{
-				_alphaLoader.unloadAndStop();
-			}
-			
-			_atfDatasList = null;
-			_alphaLoader = null;
-			_textureCollideList = null;
-			_actionIndex = null;
-			_sequenceList = null;
-		}
+        /**
+         * 释放显存中的贴图
+         */		
+        public function disposeTexture():void
+        {
+            var len:int = _textureList.length;  
+            for(var i:int =0; i<len; i++)
+            {
+                if(_textureList[i] != null)
+                {
+                    _textureList[i].dispose();
+                    _textureList[i] = null;
+                }
+                
+                if(_textureAtlasList[i] != null)
+                {
+                    _textureAtlasList[i].dispose();
+                    _textureAtlasList[i] = null;
+                }
+            }
+        }
+        
+        protected function distruct():void
+        {
+            disposeTexture();
+            
+            var len:int = _textureCollideList.length;  
+            for(var i:int =0; i<len; i++)
+            {
+                _textureCollideList[i].dispose();
+                
+                if(_atfDatasList[i] != null)
+                {
+                    _atfDatasList[i].clear();
+                }
+            }
+            
+            if(_alphaLoader != null)
+            {
+                _alphaLoader.unloadAndStop();
+            }
+            
+            _atfDatasList = null;
+            _alphaLoader = null;
+            _textureCollideList = null;
+            _actionIndex = null;
+            _sequenceList = null;
+        }
         
         /**
          * 动作列表索引
@@ -566,11 +566,11 @@ class SequenceData
     private var _frame:int;
     public function SequenceData(source:String, frame:int):void
     {
-//        _action = action;
+        //        _action = action;
         _source = source;
         _frame = frame;
     }
-//    public function get action():String { return _action; }
+    //    public function get action():String { return _action; }
     public function get source():String { return _source; }
     public function get frame():int { return _frame; }
 }

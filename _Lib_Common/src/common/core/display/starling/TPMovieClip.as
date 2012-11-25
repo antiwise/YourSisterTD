@@ -49,7 +49,7 @@ package common.core.display.starling
          * 动画计数器
          */        
         protected var _counter:Counter;
-
+        
         /**
          * 当前动画帧频
          */        
@@ -111,24 +111,24 @@ package common.core.display.starling
             super.render(support, parentAlpha);
         }
         
-		/**
-		 *
-		 * 跳转帧 
-		 * @param index
-		 * 
-		 */		
-		public function gotoFrame( index:int , force:Boolean = false ):void
-		{
-			if( _currentFrame != index || force )
-			{
-				if( index < totalFrames)
-				{
-					_currentFrame = index;
-					updateFrame();
-				}
-			}
-		}
-		
+        /**
+         *
+         * 跳转帧 
+         * @param index
+         * 
+         */		
+        public function gotoFrame( index:int , force:Boolean = false ):void
+        {
+            if( _currentFrame != index || force )
+            {
+                if( index < totalFrames)
+                {
+                    _currentFrame = index;
+                    updateFrame();
+                }
+            }
+        }
+        
         public function advanceTime(time:Number):void
         {
             if(_couldTick == false || _isPlay == false)
@@ -236,20 +236,20 @@ package common.core.display.starling
             }
             
             var nextActionFrames:Vector.<TPSequence> = _animation.getAnimation(action);
-			var len:int = nextActionFrames.length;
-			for(var i:int = 0; i<len; i++)
-			{
-				if(nextActionFrames[i] == null)
-				{
-					nextActionFrames.splice(i,1);
-					len--;
-					i--;
-				}
-			}
+            var len:int = nextActionFrames.length;
+            for(var i:int = 0; i<len; i++)
+            {
+                if(nextActionFrames[i] == null)
+                {
+                    nextActionFrames.splice(i,1);
+                    len--;
+                    i--;
+                }
+            }
             _currentAction = action;
             
             if(nextActionFrames == null || 
-               nextActionFrames.length == 0 )
+                nextActionFrames.length == 0 )
             {
                 trace("try to switch unknow action{"+action+"}!");
                 return false

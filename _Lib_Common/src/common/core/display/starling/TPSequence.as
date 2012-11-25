@@ -3,7 +3,7 @@ package common.core.display.starling
     import flash.geom.Point;
     
     import starling.textures.Texture;
-
+    
     public class TPSequence
     {
         private var _texture:Texture;

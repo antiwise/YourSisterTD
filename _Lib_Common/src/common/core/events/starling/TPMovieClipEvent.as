@@ -1,7 +1,7 @@
 package  common.core.events.starling
 {
-	import starling.events.Event;
-
+    import starling.events.Event;
+    
     public class TPMovieClipEvent extends Event
     {
         
