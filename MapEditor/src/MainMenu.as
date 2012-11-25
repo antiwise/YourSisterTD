@@ -11,7 +11,7 @@ package
         private var _menuItemIndex:Vector.<String>;
         private var _enable:Boolean;
         private var _clearRecentProject:NativeMenuItem;
- //       private var _recentProjectList:NativeMenu;
+        //       private var _recentProjectList:NativeMenu;
         public function MainMenu()
         {
             super();
@@ -21,13 +21,13 @@ package
             
             var subMenu:NativeMenu;
             subMenu = new NativeMenu();
-			
+            
             integrateSubMenu(subMenu, new EditorMenuItem("新建",  "new", false, "n", true));
             integrateSubMenu(subMenu, new EditorMenuItem("打开",  "open", false, "o", true));
             integrateSubMenu(subMenu, new EditorMenuItem("保存",  "save", false, "s", true));
             integrateSubMenu(subMenu, new EditorMenuItem("保存为...",  "saveas", false, "s", true, true));
-			
-			addSubmenu(subMenu, "  文件  ");
+            
+            addSubmenu(subMenu, "  文件  ");
         }
         
         
@@ -50,9 +50,9 @@ package
             }
             dispatchEvent(new Event(type));
         }
-	}
+    }
 }
-        
+
 import flash.display.NativeMenuItem;
 import flash.ui.Keyboard;
 
