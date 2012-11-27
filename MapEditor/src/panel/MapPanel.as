@@ -64,11 +64,15 @@ package panel
             {
                 if( _addType >= 1000)
                 {
-                    if( _mapData.compentList[ blockX + blockY * 30 ] != _addType )
+                    if( _addType == int.MAX_VALUE )
+                    {
+                        _mapData.compentList[ blockX + blockY * 30 ] = 0;
+                    } 
+                    else if( _mapData.compentList[ blockX + blockY * 30 ] != _addType )
                     {
                         _mapData.compentList[ blockX + blockY * 30 ] = _addType;
-                        _mapModel.updateCompentBlock( _mapData.compentList[ blockX + blockY * 30 ], blockX + blockY * 30 );
                     }
+                    _mapModel.updateCompentBlock( _mapData.compentList[ blockX + blockY * 30 ], blockX + blockY * 30 );
                 }
                 else
                 {

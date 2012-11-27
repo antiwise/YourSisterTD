@@ -68,6 +68,23 @@ package
                 _enemyList[i] = new Enemy( color, i );
                 addChild( _enemyList[i] );
             }
+            else if(data == 0)
+            {
+                if(_enemyList[i])
+                {
+                    if(_enemyList[i].parent)
+                    {
+                        _enemyList[i].parent.removeChild(_enemyList[i]);
+                    }
+                }
+                if(_characterList[i])
+                {
+                    if(_characterList[i].parent)
+                    {
+                        _characterList[i].parent.removeChild(_characterList[i]);
+                    }
+                }
+            }
         }
     }
 }

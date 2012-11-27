@@ -110,6 +110,7 @@ package
             _controlsPanel.addEventListener( "addCharacter" , onAddCharacterHandler );	
             _controlsPanel.addEventListener( "addEnemy" , onAddEnemykHandler );	
             _controlsPanel.addEventListener( "playStop" , onPlayStopHandler );	
+            _controlsPanel.addEventListener( "clean" , onCleanHandler );	
         }
         
         protected function onPlayStopHandler(e:Event):void
@@ -138,6 +139,11 @@ package
         protected function onAddCharacterHandler(e:Event):void
         {
             _mapPanel.addType = 1000;
+        }
+        
+        protected function onCleanHandler(e:Event):void
+        {
+            _mapPanel.addType = int.MAX_VALUE;
         }
         
         private function onAddBlockHandler(e:Event):void
