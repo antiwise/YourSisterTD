@@ -1,5 +1,6 @@
 package common.base.views.starling
 {
+    import common.base.interfaces.ITickable;
     import common.base.interfaces.IView;
     
     import starling.display.Sprite;
@@ -10,8 +11,9 @@ package common.base.views.starling
      * 所有视图类都必须继承这个类 
      * @author noah
      */	
-    public class BaseView extends Sprite implements IView 
+    public class BaseView extends Sprite implements IView, ITickable
     {
+        protected var _couldTick:Boolean;
         /**
          * 构造函数
          */		
@@ -27,6 +29,17 @@ package common.base.views.starling
         {
             
         }
+        
+        public function tick(delta:Number):void
+        {
+            advanceTime( delta );
+        }
+        
+        public function advanceTime( time:Number ):void
+        {
+            
+        }
+        
         /**
          * 更新视图
          */		
@@ -40,6 +53,11 @@ package common.base.views.starling
         public function destroy():void
         {
             
+        }
+        
+        public function get couldTick():Boolean
+        {
+            return _couldTick;
         }
     }
 }

@@ -26,7 +26,6 @@ package game.base.units
             return _controller;
         }
         
-        protected var _couldTick:Boolean;
         protected var _isPlay:Boolean;
         protected var _counter:Counter;
         protected var _motionFinishedStop:Boolean;
@@ -39,7 +38,7 @@ package game.base.units
             super();
         }
         
-        public function advanceTime( time:Number ):void
+        override public function advanceTime( time:Number ):void
         {
             if(_couldTick == false || _isPlay == false)
             {
@@ -79,7 +78,6 @@ package game.base.units
         
         protected function updateFrame():void
         {
-            // TODO Auto Generated method stub
         }
         
         public function play():void
@@ -93,7 +91,6 @@ package game.base.units
         
         protected function checkMotionIsFinished():Boolean
         {
-            // TODO Auto Generated method stub
             return false;
         }
     }
