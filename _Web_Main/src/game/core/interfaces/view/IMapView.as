@@ -7,7 +7,7 @@ package  game.core.interfaces.view
     
     public interface IMapView extends IGameUnitView
     {
-        function get groundLevel():Image;
+        function get groundLevel():Sprite;
         function get contentLevel():Sprite;
         function get airLevel():Sprite;
         

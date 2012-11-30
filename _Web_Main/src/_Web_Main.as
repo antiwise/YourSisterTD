@@ -26,7 +26,7 @@ package
         
         protected function initialize(e:Event = null):void
         {
-            MainMgr.instance.init(this, true );
+            MainMgr.init(this, true );
         }
     }
 }

@@ -34,7 +34,7 @@ package game.core.map
         /**
          * 地面层 
          */		
-        protected var _groundLevel:Image;
+        protected var _groundLevel:Sprite;
         /**
          * 容器层 (排序)
          */		
@@ -43,8 +43,6 @@ package game.core.map
          * 天空层 
          */		
         protected var _airLevel:Sprite;
-        
-        private var _renderTexutre:RenderTexture;
         
         protected var initParams:Object;
         
@@ -68,7 +66,7 @@ package game.core.map
         {
             _airLevel = new Sprite();
             _contentLevel = new Sprite();
-            _groundLevel = new Image( NULL_TEXTURE );
+            _groundLevel = new Sprite();
             addChild(_groundLevel);
             addChild(_contentLevel);
             addChild(_airLevel);
@@ -101,7 +99,6 @@ package game.core.map
                     }
                 }
             }
-            drawMapGroundLevel();
         }
         
         private function drawContentBlock( x:uint, y:uint):void
@@ -113,19 +110,9 @@ package game.core.map
         
         private function drawGroundBlock( x:uint, y:uint ):void
         {
-            if(!_renderTexutre)
-            {
-                _renderTexutre = new RenderTexture( 960, 640 );
-            }
-            var matrix:Matrix = new Matrix();
-            matrix.translate( x * MapModel.BLOCK_WIDTH, y * MapModel.BLOCK_WIDTH);
-            _renderTexutre.draw( MgrObjects.mapMgr.getMapBlock( 0, x, y ).image, matrix );
-        }
-        
-        private function drawMapGroundLevel():void
-        {
-            _groundLevel.texture = _renderTexutre;
-            _groundLevel.readjustSize();
+            var block:MapBlockView = MgrObjects.mapMgr.getMapBlock( 0, x, y );
+            _groundLevel.addChild( block );
+            objTree.insertObj(block);
         }
         
         public function addCharacter( character:ICharacterView ):void
@@ -133,7 +120,7 @@ package game.core.map
             _contentLevel.addChild( character as CharacterUnit );
         }
         
-        public function get groundLevel():Image
+        public function get groundLevel():Sprite
         {
             return this._groundLevel;
         }

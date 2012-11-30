@@ -1,5 +1,6 @@
 package game.starling
 {
+    import common.base.interfaces.ITickable;
     import common.base.views.starling.BaseView;
     import common.data.IMapData;
     
@@ -22,8 +23,9 @@ package game.starling
     import starling.events.TouchEvent;
     import starling.events.TouchPhase;
     
-    public class GameWorld extends Sprite
+    public class GameWorld extends Sprite implements ITickable
     {
+        private var _couldTick:Boolean;
         /**
          * 
          */		
@@ -44,6 +46,7 @@ package game.starling
          * 
          */		
         public static var GAME_MODE:uint;
+        private var _lastRenderTimeStamp:Number;
         
         public function GameWorld()
         {
@@ -74,6 +77,39 @@ package game.starling
             MgrObjects.uiMgr.init();
             var mapUrl:String = "data/map0001.map";
             MgrObjects.mapMgr.loadMap( mapUrl, onMapJsonLoadCompleteHandler );
+            
+            _couldTick = true;
+        }
+        
+        private function onEnterFrame(e:EnterFrameEvent):void
+        {
+            var currentTimeStamp:Number = new Date().time;
+            var delta:Number = (currentTimeStamp - _lastRenderTimeStamp)/1000;
+            _lastRenderTimeStamp = currentTimeStamp;
+            
+            if( couldTick )
+            {
+                tick(delta);
+            }
+        }
+        
+        public function tick(delta:Number):void
+        {
+            //			if(_map)
+            //			{
+            //				(_map as BaseView).sortChildren( sortFunction );
+            //			}
+            //            if( _characterUnit )
+            //            {
+            //                _characterUnit.onUpdateHandler(null);
+            //            }
+            //			for each(enemyUnit in enemyUnitArr)
+            //			{
+            //				if(enemyUnit)
+            //				{
+            //					enemyUnit.onInputHandler( map );
+            //				}
+            //			}
         }
         
         private function onMapJsonLoadCompleteHandler( data:ByteArray ):void
@@ -116,30 +152,6 @@ package game.starling
             //			KeyBoardMgr.instance.init( MgrObjects.displayMgr.getStage );;
         }
         
-        /**
-         * 八面
-         * 1下 2右下 3右 4右上 5上 6左上 7左 8左下
-         * @param e
-         */			
-        private function onEnterFrame(e:EnterFrameEvent):void
-        {
-            //			if(_map)
-            //			{
-            //				(_map as BaseView).sortChildren( sortFunction );
-            //			}
-            if( _characterUnit )
-            {
-                _characterUnit.onUpdateHandler(null);
-            }
-            //			for each(enemyUnit in enemyUnitArr)
-            //			{
-            //				if(enemyUnit)
-            //				{
-            //					enemyUnit.onInputHandler( map );
-            //				}
-            //			}
-        }
-        
         //		private function sortFunction( objA:DisplayObject, objB:DisplayObject ):Number
         //		{
         //			return (objA.y*2560+objA.x)-(objB.y*2560+objB.x);
@@ -178,6 +190,11 @@ package game.starling
         private function onKeyDownEventHandle(e:KeyboardEvent):void
         {
             //			trace("onKeyDownEventHandle:", e.keyCode);
+        }
+        
+        public function get couldTick():Boolean
+        {
+            return _couldTick;
         }
     }
 }

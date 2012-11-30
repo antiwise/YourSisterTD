@@ -58,13 +58,13 @@ package game.core.managers
          * @param _root
          * @param debugMode
          */
-        public function init(_root:Sprite, debugMode:Boolean ):void
+        public static function init(_root:Sprite, debugMode:Boolean ):void
         {
-            startTimeCount();
+            instance.startTimeCount();
             
-            _debugMode = debugMode;
+            instance._debugMode = debugMode;
             
-            addManagers();
+            instance.addManagers();
             
             MgrObjects.displayMgr.init( _root );
             
@@ -73,8 +73,8 @@ package game.core.managers
             Starling.multitouchEnabled = true;
             Starling.handleLostContext = true;
             
-            _starlingEngine = new Starling( GameWorld, MgrObjects.displayMgr.getStage, new Rectangle(0,0,960,640),null,"auto","baseline");
-            _starlingEngine.start();
+            instance._starlingEngine = new Starling( GameWorld, MgrObjects.displayMgr.getStage, new Rectangle(0,0,960,640),null,"auto","baseline");
+            instance._starlingEngine.start();
         }
         
         /**
