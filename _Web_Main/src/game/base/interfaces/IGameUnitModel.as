@@ -1,6 +1,6 @@
 package  game.base.interfaces
 {
-    import common.base.interfaces.IModel;
+    import common.core.interfaces.IModel;
     
     import flash.events.IEventDispatcher;
     

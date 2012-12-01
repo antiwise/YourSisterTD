@@ -1,6 +1,6 @@
 package
 {
-    import common.data.IMapData;
+    import common.core.interfaces.IMapData;
     
     import flash.display.Sprite;
     

@@ -2,7 +2,7 @@ package panel
 {
     import com.bit101.components.Panel;
     
-    import common.data.IMapData;
+    import common.core.interfaces.IMapData;
     
     import flash.display.DisplayObjectContainer;
     import flash.display.Shape;

@@ -1,6 +1,6 @@
 package game.base.models
 {
-    import common.base.models.BaseModel;
+    import common.core.models.BaseModel;
     
     import flash.geom.Rectangle;
     

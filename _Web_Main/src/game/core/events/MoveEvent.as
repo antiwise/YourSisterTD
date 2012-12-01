@@ -1,6 +1,6 @@
 package game.core.events
 {
-    import common.base.events.BaseEvent;
+    import common.core.events.BaseEvent;
     
     import flash.geom.Point;
     

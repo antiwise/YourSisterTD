@@ -1,6 +1,6 @@
 package game.base.interfaces
 {
-    import common.base.interfaces.IView;
+    import common.core.interfaces.IView;
     
     public interface IGameUnitView extends IView
     {

@@ -1,6 +1,7 @@
 package game.core.map
 {
-    import common.data.IMapData;
+    import common.core.interfaces.IMapData;
+    import common.core.interfaces.ITickable;
     
     import flash.display.BitmapData;
     import flash.geom.Matrix;
@@ -74,6 +75,39 @@ package game.core.map
             _model = new MapModel( initParams["mapData"] );
             objTree = new QuadTrees( 3 , new Rectangle(0,0, 960 , 640));
             drawMapBlocks();
+            
+            _couldTick = true;
+        }
+        
+        override public function tick( delta:Number ):void
+        {
+            super.tick( delta );
+            
+            var child:ITickable;
+            for(var i:int = 0;i< _groundLevel.numChildren;i++)
+            {
+                child = _groundLevel.getChildAt( i ) as ITickable;
+                if(child && child.couldTick == true)
+                {
+                    child.tick( delta );
+                }
+            }
+            for( i = 0;i< _contentLevel.numChildren;i++)
+            {
+                child = _contentLevel.getChildAt( i ) as ITickable;
+                if(child && child.couldTick == true)
+                {
+                    child.tick( delta );
+                }
+            }
+            for( i = 0;i< _airLevel.numChildren;i++)
+            {
+                child = _airLevel.getChildAt( i ) as ITickable;
+                if(child && child.couldTick == true)
+                {
+                    child.tick( delta );
+                }
+            }
         }
         
         override public function advanceTime(time:Number):void
@@ -120,26 +154,6 @@ package game.core.map
             _contentLevel.addChild( character as CharacterUnit );
         }
         
-        public function get groundLevel():Sprite
-        {
-            return this._groundLevel;
-        }
-        public function get contentLevel():Sprite
-        {
-            return this._contentLevel;
-        }
-        public function get airLevel():Sprite
-        {
-            return this._airLevel;
-        }
-        public function get objTree():QuadTrees
-        {
-            return this._objTree;
-        }
-        public function set objTree(value:QuadTrees):void
-        {
-            this._objTree = value;
-        }
         //		/**
         //		 * 添加怪物
         //		 * @param monster
@@ -171,5 +185,26 @@ package game.core.map
         //			}
         //			return arr;
         //		}
+        
+        public function get groundLevel():Sprite
+        {
+            return this._groundLevel;
+        }
+        public function get contentLevel():Sprite
+        {
+            return this._contentLevel;
+        }
+        public function get airLevel():Sprite
+        {
+            return this._airLevel;
+        }
+        public function get objTree():QuadTrees
+        {
+            return this._objTree;
+        }
+        public function set objTree(value:QuadTrees):void
+        {
+            this._objTree = value;
+        }
     }
 }

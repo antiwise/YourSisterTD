@@ -1,30 +1,25 @@
 package game.base.units
 {
-    import common.base.views.starling.BaseView;
-    import common.utils.Counter;
+    import common.core.utils.Counter;
+    import common.core.views.BaseView;
     
     import game.base.interfaces.IGameUnitController;
     import game.base.interfaces.IGameUnitModel;
     import game.base.interfaces.IGameUnitView;
     
-    public class GameUint extends BaseView implements IGameUnitView
+    import starling.animation.IAnimatable;
+    
+    public class GameUint extends BaseView implements IGameUnitView, IAnimatable
     {
         /**
          * 模型 
          */		
         protected var _model:IGameUnitModel;
-        public function get model():IGameUnitModel
-        {
-            return _model;
-        }
+        
         /**
          * 控制器 
          */		
         protected var _controller:IGameUnitController;
-        public function get controller():IGameUnitController
-        {
-            return _controller;
-        }
         
         protected var _isPlay:Boolean;
         protected var _counter:Counter;
@@ -78,6 +73,7 @@ package game.base.units
         
         protected function updateFrame():void
         {
+            
         }
         
         public function play():void
@@ -92,6 +88,16 @@ package game.base.units
         protected function checkMotionIsFinished():Boolean
         {
             return false;
+        }
+        
+        public function get model():IGameUnitModel
+        {
+            return _model;
+        }
+        
+        public function get controller():IGameUnitController
+        {
+            return _controller;
         }
     }
 }

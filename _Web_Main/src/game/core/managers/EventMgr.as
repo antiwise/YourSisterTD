@@ -1,6 +1,6 @@
 package game.core.managers
 {
-    import common.base.interfaces.IMgr;
+    import common.core.interfaces.IMgr;
     
     import flash.events.EventDispatcher;
     

@@ -1,8 +1,8 @@
 package game.starling
 {
-    import common.base.interfaces.ITickable;
-    import common.base.views.starling.BaseView;
-    import common.data.IMapData;
+    import common.core.interfaces.IMapData;
+    import common.core.interfaces.ITickable;
+    import common.core.views.BaseView;
     
     import flash.utils.ByteArray;
     
@@ -22,6 +22,8 @@ package game.starling
     import starling.events.Touch;
     import starling.events.TouchEvent;
     import starling.events.TouchPhase;
+    
+    import utils.BusyInidcate;
     
     public class GameWorld extends Sprite implements ITickable
     {
@@ -46,7 +48,6 @@ package game.starling
          * 
          */		
         public static var GAME_MODE:uint;
-        private var _lastRenderTimeStamp:Number;
         
         public function GameWorld()
         {
@@ -70,46 +71,37 @@ package game.starling
             stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDownEventHandle);
             stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUpEventHandle);
             stage.addEventListener(TouchEvent.TOUCH, onTouch);
-            addEventListener(EnterFrameEvent.ENTER_FRAME, onEnterFrame);
             
             MgrObjects.debugMgr.log( "初始化耗时: " + MainMgr.instance.endTimeCount() );
             
             MgrObjects.uiMgr.init();
+            
             var mapUrl:String = "data/map0001.map";
             MgrObjects.mapMgr.loadMap( mapUrl, onMapJsonLoadCompleteHandler );
             
             _couldTick = true;
-        }
-        
-        private function onEnterFrame(e:EnterFrameEvent):void
-        {
-            var currentTimeStamp:Number = new Date().time;
-            var delta:Number = (currentTimeStamp - _lastRenderTimeStamp)/1000;
-            _lastRenderTimeStamp = currentTimeStamp;
             
-            if( couldTick )
-            {
-                tick(delta);
-            }
+            BusyInidcate.hideBusy();
         }
         
         public function tick(delta:Number):void
         {
-            //			if(_map)
-            //			{
-            //				(_map as BaseView).sortChildren( sortFunction );
-            //			}
+            if(_map)
+            {
+                (_map as ITickable).tick( delta );
+//                (_map as BaseView).sortChildren( sortFunction );
+            }
             //            if( _characterUnit )
             //            {
             //                _characterUnit.onUpdateHandler(null);
             //            }
-            //			for each(enemyUnit in enemyUnitArr)
-            //			{
-            //				if(enemyUnit)
-            //				{
-            //					enemyUnit.onInputHandler( map );
-            //				}
-            //			}
+            //            for each(enemyUnit in enemyUnitArr)
+            //            {
+            //                if(enemyUnit)
+            //                {
+            //                    enemyUnit.onInputHandler( map );
+            //                }
+            //            }
         }
         
         private function onMapJsonLoadCompleteHandler( data:ByteArray ):void

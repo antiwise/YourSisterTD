@@ -1,6 +1,6 @@
 package game.core.listeners
 {
-    import common.base.listeners.BaseListener;
+    import common.core.listeners.BaseListener;
     
     import flash.events.KeyboardEvent;
     

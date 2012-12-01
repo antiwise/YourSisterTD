@@ -1,6 +1,6 @@
 package  game.core.statics
 {
-    import common.base.controllers.BaseController;
+    import common.core.controllers.BaseController;
     
     import game.core.models.statics.MapModel;
     

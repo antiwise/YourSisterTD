@@ -1,6 +1,6 @@
 package  game.core.models.statics
 {
-    import common.data.IMapData;
+    import common.core.interfaces.IMapData;
     
     import game.base.models.StaticUnitModel;
     import game.core.interfaces.model.IMapModel;

@@ -1,11 +1,12 @@
 package game.untils
 {
-    import game.core.interfaces.INode;
+    import common.core.utils.HashMap;
     
     import flash.display.DisplayObject;
     import flash.geom.Point;
     import flash.geom.Rectangle;
-    import common.utils.HashMap;
+    
+    import game.core.interfaces.INode;
     
     /**
      * 四叉树 

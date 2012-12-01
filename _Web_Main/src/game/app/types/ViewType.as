@@ -1,6 +1,6 @@
 package game.app.types
 {
-    import common.base.types.BaseType;
+    import common.core.types.BaseType;
     
     /**
      * 视图类型

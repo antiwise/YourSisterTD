@@ -1,6 +1,7 @@
 package game.core.managers
 {
-    import common.base.managers.BaseMgr;
+    import common.core.interfaces.ITickable;
+    import common.core.managers.BaseMgr;
     
     import flash.display.Loader;
     import flash.display.Sprite;
@@ -66,17 +67,25 @@ package game.core.managers
             
             instance.addManagers();
             
-            MgrObjects.displayMgr.init( _root );
+            MgrObjects.displayMgr.init(  _root.stage );
             
             MgrObjects.debugMgr.log( "MainMgr.init _debugMode = " + debugMode );
             
             Starling.multitouchEnabled = true;
             Starling.handleLostContext = true;
             
-            instance._starlingEngine = new Starling( GameWorld, MgrObjects.displayMgr.getStage, new Rectangle(0,0,960,640),null,"auto","baseline");
+            instance._starlingEngine = new Starling( GameWorld, MgrObjects.displayMgr.currentStage, new Rectangle(0,0,960,640),null,"auto","baseline");
             instance._starlingEngine.start();
         }
         
+        public static function tick( delta:Number ):void
+        {
+            var gameWorld:ITickable = Starling.current.root as ITickable;
+            if( gameWorld && gameWorld.couldTick )
+            {
+                gameWorld.tick( delta );
+            }
+        }
         /**
          * add global managers
          */		

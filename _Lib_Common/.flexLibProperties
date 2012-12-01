@@ -1,45 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
   <includeClasses>
-    <classEntry path="common.utils.UILoader"/>
-    <classEntry path="common.base.controllers.BaseController"/>
-    <classEntry path="common.base.events.BaseEvent"/>
-    <classEntry path="common.core.events.BitmapMovieCilpEvent"/>
-    <classEntry path="common.core.events.DisplayEvent"/>
-    <classEntry path="common.core.events.LayerEvent"/>
-    <classEntry path="common.core.events.LoadEvent"/>
-    <classEntry path="common.core.events.MainEvent"/>
-    <classEntry path="common.core.events.ScriptEvent"/>
-    <classEntry path="common.base.factory.BaseFactory"/>
+    <classEntry path="common.core.utils.UILoader"/>
+    <classEntry path="common.core.controllers.BaseController"/>
+    <classEntry path="common.core.events.BaseEvent"/>
     <classEntry path="common.core.layers.nostarling.LayerRpg"/>
     <classEntry path="common.core.layers.starling.LayerRpg3D"/>
-    <classEntry path="common.base.listeners.BaseListener"/>
-    <classEntry path="common.base.managers.BaseMgr"/>
-    <classEntry path="common.base.interfaces.IController"/>
-    <classEntry path="common.base.interfaces.IEvent"/>
-    <classEntry path="common.base.interfaces.IListener"/>
-    <classEntry path="common.base.interfaces.IModel"/>
-    <classEntry path="common.base.interfaces.IType"/>
-    <classEntry path="common.base.interfaces.IUnitModel"/>
-    <classEntry path="common.base.interfaces.IView"/>
-    <classEntry path="common.core.display.nostarling.BitmapMovieClip"/>
-    <classEntry path="common.base.views.nostarling.BaseView"/>
-    <classEntry path="common.base.views.starling.BaseView"/>
+    <classEntry path="common.core.listeners.BaseListener"/>
+    <classEntry path="common.core.managers.BaseMgr"/>
+    <classEntry path="common.core.interfaces.IController"/>
+    <classEntry path="common.core.interfaces.IEvent"/>
+    <classEntry path="common.core.interfaces.IListener"/>
+    <classEntry path="common.core.interfaces.IModel"/>
+    <classEntry path="common.core.interfaces.IType"/>
+    <classEntry path="common.core.interfaces.IUnitModel"/>
+    <classEntry path="common.core.interfaces.IView"/>
+    <classEntry path="common.core.views.BaseView"/>
     <classEntry path="debug.Debugger"/>
-    <classEntry path="common.utils.HashMap"/>
-    <classEntry path="common.utils.interfaces.IMap"/>
-    <classEntry path="common.base.models.BaseModel"/>
-    <classEntry path="common.base.types.BaseType"/>
-    <classEntry path="common.utils.Counter"/>
-    <classEntry path="common.utils.GeomUtil"/>
-    <classEntry path="common.utils.KeyPoll"/>
-    <classEntry path="common.utils.Utils"/>
-    <classEntry path="common.base.interfaces.IMgr"/>
-    <classEntry path="common.utils.TextTool"/>
-    <classEntry path="common.core.display.starling.TPAnimation"/>
-    <classEntry path="common.core.display.starling.TPSequence"/>
-    <classEntry path="common.core.display.starling.TPMovieClip"/>
-    <classEntry path="common.data.IMapData"/>
+    <classEntry path="common.core.interfaces.IMap"/>
+    <classEntry path="common.core.models.BaseModel"/>
+    <classEntry path="common.core.types.BaseType"/>
+    <classEntry path="common.core.utils.Counter"/>
+    <classEntry path="common.core.utils.GeomUtil"/>
+    <classEntry path="common.core.utils.KeyPoll"/>
+    <classEntry path="common.core.utils.Utils"/>
+    <classEntry path="common.core.interfaces.IMgr"/>
+    <classEntry path="common.core.interfaces.IMapData"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

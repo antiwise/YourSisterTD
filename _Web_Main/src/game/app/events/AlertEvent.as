@@ -1,6 +1,6 @@
 package game.app.events
 {
-    import common.base.events.BaseEvent;
+    import common.core.events.BaseEvent;
     
     public class AlertEvent extends BaseEvent
     {

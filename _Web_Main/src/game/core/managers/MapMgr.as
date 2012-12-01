@@ -1,8 +1,8 @@
 package game.core.managers
 {
-    import common.base.interfaces.IMgr;
-    import common.data.IMapData;
-    import common.data.MapData;
+    import common.core.interfaces.IMgr;
+    import common.core.interfaces.IMapData;
+    import common.core.data.MapData;
     
     import flash.display.BitmapData;
     import flash.display.Shape;

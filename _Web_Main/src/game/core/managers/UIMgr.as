@@ -1,6 +1,6 @@
 package game.core.managers
 {
-    import common.base.interfaces.IMgr;
+    import common.core.interfaces.IMgr;
     
     import flash.display.Loader;
     import flash.display.MovieClip;
@@ -47,7 +47,7 @@ package game.core.managers
         protected function onLoadComplete(e:Event):void
         {
             _mainMc = (_loader.content as MovieClip)["mc"];
-            MgrObjects.displayMgr.getStage.addChildAt( _mainMc, 0 );
+            MgrObjects.displayMgr.currentStage.addChildAt( _mainMc, 0 );
             
             initMainUI();
         }

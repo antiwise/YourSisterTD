@@ -1,8 +1,8 @@
 package game.app.factorys
 {
-    import common.base.factory.BaseFactory;
-    import common.base.interfaces.IModel;
-    import common.base.interfaces.IView;
+    import common.core.factory.BaseFactory;
+    import common.core.interfaces.IModel;
+    import common.core.interfaces.IView;
     
     import game.app.types.ViewType;
     import game.app.views.LoadingView;

@@ -52,7 +52,12 @@ package game.core.map
             _model.x= initParams["x"] * MapModel.BLOCK_WIDTH;
             _model.y = initParams["y"] * MapModel.BLOCK_WIDTH;
             
-            update();
+            _couldTick = true;
+        }
+        
+        override public function tick( delta:Number ):void
+        {
+            super.tick( delta );
         }
         
         public function clone( type:int, x:int, y:int):MapBlockView

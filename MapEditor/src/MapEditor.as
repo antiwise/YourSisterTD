@@ -2,8 +2,8 @@ package
 {
     import com.bit101.components.Style;
     
-    import common.data.IMapData;
-    import common.data.MapData;
+    import common.core.interfaces.IMapData;
+    import common.core.data.MapData;
     
     import flash.display.Sprite;
     import flash.display.StageAlign;

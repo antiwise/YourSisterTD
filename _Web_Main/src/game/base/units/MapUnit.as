@@ -33,13 +33,16 @@ package game.base.units
             _model.addEventListener( ModelEvent.UPDATE, onUpdateHandler);
         }
         
-        /**
-         * 更新视图
-         */		
-        override public function update():void
+        override public function tick( delta:Number):void
         {
-            super.x = model.x;
-            super.y = model.y;
+            if(super.x != model.x)
+            {
+                super.x = model.x;
+            }
+            if(super.y != model.y)
+            {
+                super.y = model.y;
+            }
         }
         /**
          * 
@@ -47,7 +50,6 @@ package game.base.units
          */		
         public function onUpdateHandler(event:Event):void
         {
-            this.update();
             //更新四叉树节点
             if(tree)
             {
@@ -103,6 +105,16 @@ package game.base.units
             return false;
         }
         
+        public function unload():void
+        {
+            if(this._node!=null)
+            {
+                this._node.remove(this);
+                this._node = null;
+            }
+            this._tree = null;
+        }
+        
         public function get node():QuadNode 
         {
             return this._node;
@@ -118,15 +130,6 @@ package game.base.units
         public function set tree(value:QuadTrees):void 
         {
             this._tree = value;
-        }
-        public function unload():void
-        {
-            if(this._node!=null)
-            {
-                this._node.remove(this);
-                this._node = null;
-            }
-            this._tree = null;
         }
     }
 }

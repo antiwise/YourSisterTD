@@ -1,6 +1,6 @@
 package game.app.managers
 {
-    import common.base.managers.BaseMgr;
+    import common.core.managers.BaseMgr;
     import game.untils.QuadNode;
     import game.core.interfaces.INode;
     

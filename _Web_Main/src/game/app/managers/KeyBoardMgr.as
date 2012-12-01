@@ -1,6 +1,6 @@
 package  game.app.managers
 {
-    import common.utils.KeyPoll;
+    import common.core.utils.KeyPoll;
     
     import flash.display.Stage;
     

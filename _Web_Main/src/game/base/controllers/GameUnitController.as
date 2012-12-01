@@ -1,6 +1,6 @@
 package  game.base.controllers
 {
-    import common.base.controllers.BaseController;
+    import common.core.controllers.BaseController;
     
     import game.base.interfaces.IGameUnitController;
     

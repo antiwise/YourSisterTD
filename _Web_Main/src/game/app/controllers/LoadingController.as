@@ -1,6 +1,6 @@
 package game.app.controllers
 {
-    import common.base.controllers.BaseController;
+    import common.core.controllers.BaseController;
     
     public class LoadingController extends BaseController
     {

@@ -1,6 +1,6 @@
 package  game.core.managers
 {
-    import common.base.interfaces.IMgr;
+    import common.core.interfaces.IMgr;
     
     import debug.Debugger;
     
@@ -194,8 +194,8 @@ package  game.core.managers
         {
             if( _outputArea.parent == null)
             {
-                MgrObjects.displayMgr.getStage.addChild(_outputArea);
-                _outputArea.x = MgrObjects.displayMgr.getStageRect().width >> 1;
+                MgrObjects.displayMgr.currentStage.addChild(_outputArea);
+                _outputArea.x = MgrObjects.displayMgr.screenWidth >> 1;
             }
             var str:String = '';
             var len:int = params.length;

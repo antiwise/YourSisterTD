@@ -1,8 +1,8 @@
 package game.app.controllers
 {
-    import common.base.controllers.BaseController;
-    import common.base.interfaces.IModel;
-    import common.base.interfaces.IView;
+    import common.core.controllers.BaseController;
+    import common.core.interfaces.IModel;
+    import common.core.interfaces.IView;
     import game.app.models.AlertModel;
     import game.app.factorys.ViewsFactory;
     import game.app.types.ViewType;

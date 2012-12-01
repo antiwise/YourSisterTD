@@ -39,7 +39,7 @@ package  game.core.unit
             _model.addEventListener( ModelEvent.UPDATE, this.onUpdateHandler);
             characterModel.speed = initParams["speed"];
             setPosPoint();
-            update();
+//            update();
         }
         
         protected function onAttackHandler(e:ActionEvent):void
