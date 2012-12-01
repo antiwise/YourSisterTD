@@ -1,9 +1,13 @@
 package unit
 {
+    import common.core.interfaces.ITickable;
+    
     import flash.display.Shape;
     
-    public class Unit extends Shape
+    public class Unit extends Shape implements ITickable
     {
+        private var _couldTick:Boolean;
+        
         public function Unit( color:uint, i:int )
         {
             var R:Number = 16 * 0.6;
@@ -15,6 +19,16 @@ package unit
             var posY:Number = ( (i - ( i % 30 )) / 30) * WIDTH;
             this.x = posX;
             this.y = posY;
+        }
+        
+        public function tick(delta:Number):void
+        {
+            
+        }
+        
+        public function get couldTick():Boolean
+        {
+            return _couldTick;
         }
     }
 }

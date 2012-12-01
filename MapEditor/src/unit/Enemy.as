@@ -6,5 +6,10 @@ package unit
         {
             super( color, i );
         }
+        
+        override public function tick( delta:Number ):void
+        {
+            
+        }
     }
 }
