@@ -15,6 +15,7 @@ package panel
         private var _addEnemyBtn:PushButton;
         private var _playBtn:PushButton;
         private var _cleanBtn:PushButton;
+        private var _pauseBtn:PushButton;
         
         public function ControlsPanel(parent:DisplayObjectContainer=null, xpos:Number=0, ypos:Number=0)
         {
@@ -33,6 +34,14 @@ package panel
             
             _playBtn = new PushButton( this, 10, 300, "开始", onPlayStopHandler );
             _playBtn.setSize( 70, 20 );
+
+            _pauseBtn = new PushButton( this, 10, 330, "暂停", onPauseHandler );
+            _pauseBtn.setSize( 70, 20 );
+        }
+        
+        private function onPauseHandler( e:MouseEvent ):void
+        {
+            dispatchEvent(new Event( "pause" ));
         }
         
         private function onPlayStopHandler( e:MouseEvent ):void

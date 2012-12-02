@@ -31,6 +31,7 @@ package
         private var _mapPanel:MapPanel;
         private var _isPlay:Boolean;
         private var _lastRenderTimeStamp:Number;
+        private var _needReload:Boolean;
         
         public function MapEditor()
         {
@@ -79,7 +80,10 @@ package
             }
             else
             {
-                _mapPanel.reloadMap();
+                if( _needReload )
+                {
+                    _mapPanel.reloadMap();
+                }
             }
         }
         
@@ -130,6 +134,20 @@ package
             _controlsPanel.addEventListener( "addEnemy" , onAddEnemykHandler );	
             _controlsPanel.addEventListener( "playStop" , onPlayStopHandler );	
             _controlsPanel.addEventListener( "clean" , onCleanHandler );	
+            _controlsPanel.addEventListener( "pause" , onPauseHandler );	
+        }
+        
+        protected function onPauseHandler(e:Event):void
+        {
+            if(_isPlay)
+            {
+                _needReload = false;
+                _isPlay = false;
+            }
+            else
+            {
+                _isPlay = true;
+            }
         }
         
         protected function onPlayStopHandler(e:Event):void
@@ -137,6 +155,7 @@ package
             if(_isPlay)
             {
                 _isPlay = false;
+                _needReload = true;
             }
             else
             {

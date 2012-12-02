@@ -3,8 +3,9 @@ package unit
     import common.core.interfaces.ITickable;
     
     import flash.display.Shape;
+    import flash.display.Sprite;
     
-    public class Unit extends Shape implements ITickable
+    public class Unit extends Sprite implements ITickable
     {
         protected var _couldTick:Boolean;
         

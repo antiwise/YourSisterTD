@@ -1,5 +1,6 @@
 package
 {
+    import ai.CharacterAI;
     import ai.EnemyAI;
     
     import common.core.interfaces.IMapData;
@@ -30,11 +31,12 @@ package
         public function update( mapData:IMapData ):void
         {
             _mapData = mapData;
-            var iLen:int = mapData.dataList.length;
+            var iLen:int = _mapData.dataList.length;
+            graphics.clear();
             for( var i:int = 0;i<iLen;i++)
             {
-                makeBlock( mapData.dataList[i], i );
-                updateCompentBlock( mapData.compentList[i], i );
+                makeBlock( _mapData.dataList[i], i );
+                updateCompentBlock( _mapData.compentList[i], i );
             }
         }
         
@@ -115,9 +117,15 @@ package
                 child = _characterList[i] as ITickable;
                 if(child && child.couldTick)
                 {
+                    CharacterAI.execute( _characterList[i] as Character, this );
                     child.tick(delta);
                 }
             }
+        }
+        
+        public function get enemyList():Vector.<Unit>
+        {
+            return _enemyList;
         }
     }
 }

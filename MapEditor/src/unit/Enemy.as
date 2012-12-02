@@ -6,7 +6,7 @@ package unit
          * 0right, 1down, 2left, 3up 
          */
         private var _currentDir:int;
-        private var _speed:Number = 2;
+        private var _speed:Number = 1;
         private var _isMoving:Boolean;
         private var _nextBlockX:int;
         private var _nextBlockY:int;
@@ -69,7 +69,7 @@ package unit
         
         public function move( nextX:int, nextY:int, dir:int ):void
         {
-            trace( "move " + _nextBlockX + "," + _nextBlockY + " to " + nextX + "," + nextY + " d " + dir );
+//            trace( "move " + _nextBlockX + "," + _nextBlockY + " to " + nextX + "," + nextY + " d " + dir );
             _nextBlockX = nextX;
             _nextBlockY = nextY;
             _currentDir = dir;
