@@ -6,7 +6,7 @@ package unit
     
     public class Unit extends Shape implements ITickable
     {
-        private var _couldTick:Boolean;
+        protected var _couldTick:Boolean;
         
         public function Unit( color:uint, i:int )
         {
@@ -26,6 +26,10 @@ package unit
             
         }
         
+        public function dispose():void
+        {
+            _couldTick = false;
+        }
         public function get couldTick():Boolean
         {
             return _couldTick;

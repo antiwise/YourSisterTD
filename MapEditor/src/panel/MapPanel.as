@@ -16,6 +16,7 @@ package panel
         private var _mapModel:MapModel;
         private var _mouseBlock:Shape;
         private 	const WIDTH:Number = 32 * 0.6;
+        private var _isReset:Boolean;
         
         public function set addType( value:int ):void
         {
@@ -112,6 +113,24 @@ package panel
         public function onMouseUpStage():void
         {
             onMapModelOutHandler(null);
+        }
+        
+        public function tick(delta:Number):void
+        {
+            if(_mapModel)
+            {
+                _isReset = false;
+                _mapModel.tick( delta ); 
+            }
+        }
+        
+        public function reloadMap():void
+        {
+            if(!_isReset)
+            {
+                _isReset = true;
+                _mapModel.update( _mapData );
+            }
         }
     }
 }

@@ -2,8 +2,8 @@ package
 {
     import com.bit101.components.Style;
     
-    import common.core.interfaces.IMapData;
     import common.core.data.MapData;
+    import common.core.interfaces.IMapData;
     
     import flash.display.Sprite;
     import flash.display.StageAlign;
@@ -30,6 +30,7 @@ package
         private var _controlsPanel:ControlsPanel;
         private var _mapPanel:MapPanel;
         private var _isPlay:Boolean;
+        private var _lastRenderTimeStamp:Number;
         
         public function MapEditor()
         {
@@ -47,6 +48,7 @@ package
         
         private function initialize():void
         {
+            removeEventListener(Event.ADDED_TO_STAGE, initialize);
             //			new UpdateUtil("http://***/MapEditor.xml");	
             
             Style.fontName = "arial";
@@ -62,6 +64,23 @@ package
             stage.nativeWindow.addEventListener(Event.RESIZE, onResizeHandle);
             stage.addEventListener(MouseEvent.MOUSE_UP, onStageMouseUpHandler);
             stage.addEventListener(MouseEvent.ROLL_OUT, onStageMouseUpHandler);
+            stage.addEventListener(Event.ENTER_FRAME, onEnterFrameHandler)
+        }
+        
+        protected function onEnterFrameHandler(e:Event):void
+        {
+            var currentTimeStamp:Number = new Date().time;
+            var delta:Number = (currentTimeStamp - _lastRenderTimeStamp)/1000;
+            _lastRenderTimeStamp = currentTimeStamp;
+            
+            if(_isPlay)
+            {
+                _mapPanel.tick( delta );
+            }
+            else
+            {
+                _mapPanel.reloadMap();
+            }
         }
         
         protected function onStageMouseUpHandler(e:Event):void
@@ -247,6 +266,8 @@ package
          */		
         private function onOpened(e:Event):void
         {
+            e.currentTarget.removeEventListener(Event.SELECT, onOpened );
+            
             _currentFile = e.currentTarget as File;
             var fs:FileStream = new FileStream();
             fs.open(_currentFile, FileMode.READ);
@@ -264,6 +285,8 @@ package
          */		
         private function onSaved(e:Event):void
         {
+            e.currentTarget.removeEventListener(Event.COMPLETE, onSaved);
+
             _currentFile = e.currentTarget as File;
             _mapPanel.setData( _mapData );
         }
