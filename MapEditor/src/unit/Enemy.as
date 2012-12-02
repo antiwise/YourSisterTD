@@ -6,7 +6,7 @@ package unit
          * 0right, 1down, 2left, 3up 
          */
         private var _currentDir:int;
-        private var _speed:Number = 1;
+        private var _speed:Number = 2;
         private var _isMoving:Boolean;
         private var _nextBlockX:int;
         private var _nextBlockY:int;
@@ -15,30 +15,36 @@ package unit
         {
             super( color, i );
             
+            _counter.initialize();
             _couldTick = true;
         }
         
         override public function tick( delta:Number ):void
         {
-            if( _isMoving )
+            _counter.tick(delta);
+            while(_counter.expired == true)
             {
-                if( _currentDir == 0 )
+                if( _isMoving )
                 {
-                    this.x += _speed;
+                    if( _currentDir == 0 )
+                    {
+                        this.x += _speed;
+                    }
+                    else if( _currentDir == 1 )
+                    {
+                        this.y += _speed;
+                    }
+                    else if( _currentDir == 2 )
+                    {
+                        this.x -= _speed;
+                    }
+                    else if( _currentDir == 3 )
+                    {
+                        this.y -= _speed;
+                    }
+                    check();
                 }
-                else if( _currentDir == 1 )
-                {
-                    this.y += _speed;
-                }
-                else if( _currentDir == 2 )
-                {
-                    this.x -= _speed;
-                }
-                else if( _currentDir == 3 )
-                {
-                    this.y -= _speed;
-                }
-                check();
+                _counter.reset(_targetFrameRate);
             }
         }
         

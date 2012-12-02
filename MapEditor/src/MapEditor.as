@@ -21,7 +21,7 @@ package
     import panel.ControlsPanel;
     import panel.MapPanel;
     
-    [SWF(width="800", height="405", frameRate="60",backgroundColor="0x000000")]
+    [SWF(width="800", height="405", frameRate="30",backgroundColor="0x000000")]
     public class MapEditor extends Sprite
     {
         private var _currentFile:File;
